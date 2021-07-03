@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Codeforces-Mobile",
-    "slug": "Codeforces-Mobile",
+    "name": "Mobile Inventory",
+    "slug": "Mobile Inventory",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
