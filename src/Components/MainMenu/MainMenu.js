@@ -50,7 +50,7 @@ export default function MainMenu(props) {
       <View style={{display:'flex',flexDirection:'column'}}>
           <View style={{display:'flex',flexDirection:'row'}}>
             <TouchableOpacity onPress={() => props.navigation.navigate("Stores")}>
-                <BottomOption title="Stores" icon="home"/>
+                <BottomOption title="Stores" icon="business"/>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => props.navigation.navigate("Help")}>
                 <BottomOption title="Help" icon="help-circle" />
