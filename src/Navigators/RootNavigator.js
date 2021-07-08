@@ -2,7 +2,7 @@ import React from "react"
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { Icon } from "react-native-elements";
 import MainMenu from "../Screens/MainMenu"
-import Goods from "../Screens/Goods"
+import Goods from "./GoodsNavigator"
 import Documents from "../Screens/Documents"
 import Expenses from "../Screens/Expenses"
 import Stores from "../Screens/Stores"

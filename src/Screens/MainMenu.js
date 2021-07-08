@@ -11,7 +11,16 @@ export default function Compare(props) {
         height: "100%",
       }}
     >
-      <MainMenu navigation={props.navigation}/>
+      <Text
+        style={{
+          backgroundColor: "#ff7300",
+          textAlign: "center",
+          color: "#fff",
+        }}
+      >
+        MainMenu
+      </Text>
+      <MainMenu navigation={props.navigation} />
     </ScrollView>
   );
 }
