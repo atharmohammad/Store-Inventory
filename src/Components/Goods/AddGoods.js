@@ -1,7 +1,17 @@
-import React from "react"
+import React,{useState} from "react"
 import { Input,Icon } from "react-native-elements";
-import { ScrollView , View , StyleSheet , Text} from "react-native";
+import { ScrollView , View , StyleSheet , Text, TouchableOpacity} from "react-native";
 export default function AddGoods(props){
+    const [quantity,setQuantity] = useState(0);
+
+    const changeQuantity = (value)=>{
+      if(value == ""){
+        setQuantity(0);
+        return;
+      }
+      setQuantity(parseInt(value))
+    }
+
     return (
       <>
         <Text style={styles.title}>Add Goods</Text>
@@ -12,15 +22,29 @@ export default function AddGoods(props){
             <Icon name="barcode" type="ionicon" size={40} color="orange" />
           </View>
           <Input placeholder="Description" />
+          <Text>Quantity</Text>
           <View style={styles.quantityView}>
-            <Input placeholder="Quantity" />
-            <Icon name="add-circle" type="ionicon" size={40} color="orange" />
-            <Icon
-              name="remove-circle"
-              type="ionicon"
-              size={40}
-              color="#cf1d1d"
+            <Input
+              placeholder="Quantity"
+              keyboardType="numeric"
+              value={quantity.toString()}
+              onChangeText={(value)=>changeQuantity(value)}
             />
+            <TouchableOpacity onPress={() => setQuantity((prev) => parseInt(prev) + 1)}>
+              <Icon name="add-circle" type="ionicon" size={40} color="orange" />
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                if (quantity > 0) setQuantity((prev) => parseInt(prev) - 1);
+              }}
+            >
+              <Icon
+                name="remove-circle"
+                type="ionicon"
+                size={40}
+                color="#cf1d1d"
+              />
+            </TouchableOpacity>
           </View>
         </ScrollView>
       </>

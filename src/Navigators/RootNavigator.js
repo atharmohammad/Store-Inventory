@@ -4,7 +4,7 @@ import { Icon } from "react-native-elements";
 import MainMenu from "../Screens/MainMenu"
 import Goods from "./GoodsNavigator"
 import Documents from "../Screens/Documents"
-import Expenses from "../Screens/Expenses"
+import Expenses from "./ExpenseNavigator"
 import Stores from "../Screens/Stores"
 import IncomingItems from "../Screens/IncomingItems"
 import OutgoingItems from "../Screens/OutgoingItems"

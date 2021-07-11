@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Text, Input,Icon } from "react-native-elements";
 import { TouchableOpacity, FlatList, ScrollView,StyleSheet,View } from "react-native";
 import * as SQLite from "expo-sqlite";
+import AddExpense from "../Components/Expenses/AddExpense";
 
 
 export default function Goods(props) {
@@ -48,7 +49,7 @@ export default function Goods(props) {
   return (
     <View style={styles.head}>
       <ScrollView style={styles.scrollView}>
-        {allGoods ? null : (
+        {allGoods ? <AddExpense/> : (
           <Icon
             name="gift"
             type="ionicon"
@@ -75,7 +76,7 @@ const styles = StyleSheet.create({
   head: { 
     backgroundColor: "#fff" , 
     display:'flex',
-    height:"100%"
+    flex:1
   },
   addIcon: {
     alignSelf: "flex-end",
