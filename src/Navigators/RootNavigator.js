@@ -6,15 +6,15 @@ import Goods from "./GoodsNavigator"
 import Documents from "../Screens/Documents"
 import Expenses from "./ExpenseNavigator"
 import Stores from "../Screens/Stores"
-import IncomingItems from "../Screens/IncomingItems"
+import IncomingItems from "./IncomingItemNavigator"
 import OutgoingItems from "../Screens/OutgoingItems"
-import Costumer from "../Screens/Costumer"
+import Costumer from "./CostumerNavigator"
 import Help from "../Screens/Help"
 import About from "../Screens/About"
-import Suppliers from "../Screens/Suppliers"
+import Suppliers from "./SupplierNavigator"
 import Report from "../Screens/Report"
 import DrawerHeader from "../Components/MainMenu/DrawerHeader";
-import Notes from "../Screens/Notes"
+import Notes from "./NotesNavigator"
 
 const Drawer = createDrawerNavigator();
 
@@ -96,7 +96,7 @@ export default function RootNavigator(props){
         options={{...screenOptions,
             drawerIcon: ({focused, size}) => (
               <Icon
-                name="add-circle"
+                name="arrow-down-circle"
                 type="ionicon"
                 color={focused ? '#fff' : '#f58a42'}
                 size={20}
@@ -110,7 +110,7 @@ export default function RootNavigator(props){
         options={{...screenOptions,
             drawerIcon: ({focused, size}) => (
               <Icon
-                name="remove-circle"
+                name="arrow-up-circle"
                 type="ionicon"
                 color={focused ? '#fff' : '#f58a42'}
                 size={20}

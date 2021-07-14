@@ -49,7 +49,7 @@ export default function Goods(props) {
   return (
     <View style={styles.head}>
       <ScrollView style={styles.scrollView}>
-        {allGoods ? <AddExpense/> : (
+        {allGoods ? null : (
           <Icon
             name="gift"
             type="ionicon"

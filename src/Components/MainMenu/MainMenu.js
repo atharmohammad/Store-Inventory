@@ -26,8 +26,8 @@ export default function MainMenu(props) {
 
       <View style={{display:'flex',flexDirection:'column'}}>
           <View style={{display:'flex',flexDirection:'row'}}>
-            <TouchableOpacity onPress={() => props.navigation.navigate("Suplliers")}>
-                <BottomOption title="Suplliers" icon="person-add"/>
+            <TouchableOpacity onPress={() => props.navigation.navigate("Suppliers")}>
+                <BottomOption title="Suppliers" icon="person-add"/>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => props.navigation.navigate("Costumer")}>
                 <BottomOption title="Costumers" icon="person-remove" />
@@ -35,10 +35,10 @@ export default function MainMenu(props) {
           </View>
         <View style={{display:'flex',flexDirection:'row'}}>
             <TouchableOpacity onPress={() => props.navigation.navigate("IncomingItems")}>
-                <BottomOption title="Incoming" icon="add-circle"/>
+                <BottomOption title="Incoming" icon="arrow-down-circle"/>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => props.navigation.navigate("OutgoingItems")}>
-                <BottomOption title="Outgoing" icon="remove-circle" />
+                <BottomOption title="Outgoing" icon="arrow-up-circle" />
             </TouchableOpacity>
         </View>
       </View>
