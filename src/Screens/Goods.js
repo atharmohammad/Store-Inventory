@@ -9,42 +9,28 @@ export default function Goods(props) {
   const db = SQLite.openDatabase("Store_Inventory");
   const [allGoods, setAllGoods] = useState(null);
 
-  // useEffect(() => {
-  //   db.transaction((tx) => {
-  //     tx.executeSql(
-  //       "CREATE TABLE IF NOT EXISTS goods (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT)"
-  //     );
-  //     tx.executeSql(
-  //       "SELECT * FROM goods",
-  //       null,
-  //       (txObj, { rows: { _array } }) => {
-  //         console.log(_array);
-  //         setAllGoods(_array);
-  //       },
-  //       (txObj, err) => {
-  //         console.log(err);
-  //       }
-  //     );
-  //   });
-  // }, []);
+  useEffect(() => {
+    db.transaction((tx) => {
+      tx.executeSql(
+        "SELECT * FROM goods",
+        null,
+        (txObj, { rows: { _array } }) => {
+          console.log(_array);
+          setAllGoods(_array);
+        },
+        (txObj, err) => {
+          console.log(err);
+        }
+      );
+    });
+  }, []);
 
-  // const addGoods = () => {
-  //   db.transaction((tx) => {
-  //     tx.executeSql(
-  //       "INSERT INTO goods (name) values (?)",
-  //       [goods],
-  //       (txObj, resultSet) => {
-  //         console.log(resultSet.insertId);
-  //       }
-  //     );
-  //   });
-  // };
 
-  // const drop = ()=>{
-  //   db.transaction(tx=>{
-  //     tx.executeSql("DROP TABLE goods")
-  //   })
-  // }
+  const drop = ()=>{
+    db.transaction(tx=>{
+      tx.executeSql("DROP TABLE goods")
+    })
+  }
 
   return (
     <View style={styles.head}>

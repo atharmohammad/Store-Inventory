@@ -1,8 +1,41 @@
-import React,{useState} from "react"
+import React,{useState,useEffect} from "react"
 import { Input,Icon } from "react-native-elements";
 import { ScrollView , View , StyleSheet , Text, TouchableOpacity} from "react-native";
+import * as SQLite from "expo-sqlite";
+
 export default function AddGoods(props){
-    const [quantity,setQuantity] = useState(0);
+    const db = SQLite.openDatabase("Store_Inventory");
+    const [name, setName] = useState("")
+    const [barcode, setBarcode] = useState("")
+    const [description, setDescription] = useState("")
+    const [quantity, setQuantity] = useState(0)
+
+    useEffect(() => {
+      db.transaction((tx) => {
+        tx.executeSql(
+          "CREATE TABLE IF NOT EXISTS goods (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT , barcode TEXT , description TEXT , quantity INT)"
+        );
+      });
+    }, []);
+  
+    const addGoods = () => {
+      db.transaction((tx) => {
+        tx.executeSql(
+          "INSERT INTO goods (name , barcode , description , quantity) values (? , ? , ? , ?)",
+          [name ,barcode , description , quantity],
+          (txObj, resultSet) => {
+            console.log(resultSet.insertId);
+          }
+        );
+      });
+    };
+  
+    const drop = ()=>{
+      db.transaction(tx=>{
+        tx.executeSql("DROP TABLE goods")
+      })
+    }
+  
 
     const changeQuantity = (value)=>{
       if(value == ""){
@@ -16,19 +49,19 @@ export default function AddGoods(props){
       <>
         <Text style={styles.title}>Add Goods</Text>
         <ScrollView style={styles.scrollView}>
-          <Input placeholder="Name" />
+          <Input placeholder="Name" onChange={setName}/>
           <View style={styles.barView}>
-            <Input placeholder="BarCode" />
+            <Input placeholder="BarCode" onChange={setBarcode}/>
             <Icon name="barcode" type="ionicon" size={40} color="orange" />
           </View>
-          <Input placeholder="Description" />
+          <Input placeholder="Description" onChange={setDescription} />
           <Text>Quantity</Text>
           <View style={styles.quantityView}>
             <Input
               placeholder="Quantity"
               keyboardType="numeric"
               value={quantity.toString()}
-              onChangeText={(value)=>changeQuantity(value)}
+              onChangeText={setQuantity}
             />
             <TouchableOpacity onPress={() => setQuantity((prev) => parseInt(prev) + 1)}>
               <Icon name="add-circle" type="ionicon" size={40} color="orange" />
@@ -46,6 +79,15 @@ export default function AddGoods(props){
               />
             </TouchableOpacity>
           </View>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => {
+              addGoods() 
+              props.navigation.navigate("Goods")
+            }}
+          >
+            <Text style={{ color: "#fff", fontWeight: "bold" }}>Save</Text>
+          </TouchableOpacity>
         </ScrollView>
       </>
     );
@@ -73,5 +115,12 @@ const styles = StyleSheet.create({
       backgroundColor:'#f58a42',
       color:'#fff',
       textAlign:'center'
+    },
+    button:{
+      backgroundColor:'#f58a42',
+      padding:10,
+      alignSelf:'flex-end',
+      marginRight:21,
+      borderRadius:10
     }
 })
