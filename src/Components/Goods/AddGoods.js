@@ -1,41 +1,13 @@
 import React,{useState,useEffect} from "react"
 import { Input,Icon } from "react-native-elements";
 import { ScrollView , View , StyleSheet , Text, TouchableOpacity} from "react-native";
-import * as SQLite from "expo-sqlite";
 
 export default function AddGoods(props){
-    const db = SQLite.openDatabase("Store_Inventory");
-    const [name, setName] = useState("")
-    const [barcode, setBarcode] = useState("")
-    const [description, setDescription] = useState("")
-    const [quantity, setQuantity] = useState(0)
 
-    useEffect(() => {
-      db.transaction((tx) => {
-        tx.executeSql(
-          "CREATE TABLE IF NOT EXISTS goods (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT , barcode TEXT , description TEXT , quantity INT)"
-        );
-      });
-    }, []);
-  
-    const addGoods = () => {
-      db.transaction((tx) => {
-        tx.executeSql(
-          "INSERT INTO goods (name , barcode , description , quantity) values (? , ? , ? , ?)",
-          [name ,barcode , description , quantity],
-          (txObj, resultSet) => {
-            console.log(resultSet.insertId);
-          }
-        );
-      });
-    };
-  
-    const drop = ()=>{
-      db.transaction(tx=>{
-        tx.executeSql("DROP TABLE goods")
-      })
-    }
-  
+    const [Name,setName] = useState("");
+    const [quantity,setQuantity]  = useState(0);
+    const [barcode,setBarcode] = useState("");
+    const [description,setDescription] = useState("");
 
     const changeQuantity = (value)=>{
       if(value == ""){
@@ -82,7 +54,6 @@ export default function AddGoods(props){
           <TouchableOpacity
             style={styles.button}
             onPress={() => {
-              addGoods() 
               props.navigation.navigate("Goods")
             }}
           >

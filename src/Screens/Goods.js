@@ -1,36 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Text, Input,Icon } from "react-native-elements";
 import { TouchableOpacity, FlatList, ScrollView,StyleSheet,View } from "react-native";
-import * as SQLite from "expo-sqlite";
 import AddExpense from "../Components/Expenses/AddExpense";
 
 
 export default function Goods(props) {
-  const db = SQLite.openDatabase("Store_Inventory");
   const [allGoods, setAllGoods] = useState(null);
-
-  useEffect(() => {
-    db.transaction((tx) => {
-      tx.executeSql(
-        "SELECT * FROM goods",
-        null,
-        (txObj, { rows: { _array } }) => {
-          console.log(_array);
-          setAllGoods(_array);
-        },
-        (txObj, err) => {
-          console.log(err);
-        }
-      );
-    });
-  }, []);
-
-
-  const drop = ()=>{
-    db.transaction(tx=>{
-      tx.executeSql("DROP TABLE goods")
-    })
-  }
 
   return (
     <View style={styles.head}>
