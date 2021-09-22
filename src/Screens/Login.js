@@ -10,11 +10,23 @@ import {
   TouchableOpacity,
   Dimensions
 } from "react-native";
+import axios from '../Axios/axios'
+
 const win = Dimensions. get('window');
 
+
 export default function Login(props) {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
+  const loginUser = async()=>{
+    try{
+      const shop = await axios.post('/login',{UserName:username,Password:password});
+      console.log(shop)
+    }catch(e){
+      console.log(e);
+    }
+  }
 
   return (
     <View style={styles.container}>
@@ -30,7 +42,7 @@ export default function Login(props) {
           style={styles.TextInput}
           placeholder="UserName"
           placeholderTextColor="#003f5c"
-          onChangeText={(email) => setEmail(email)}
+          onChangeText={(username) => setUsername(username)}
         />
       </View>
 
@@ -44,7 +56,7 @@ export default function Login(props) {
         />
       </View>
 
-      <TouchableOpacity style={styles.loginBtn} onPress={()=>props.navigation.navigate('SignUp')}>
+      <TouchableOpacity style={styles.loginBtn} onPress={loginUser}>
         <Text style={styles.loginText}>LOGIN</Text>
       </TouchableOpacity>
 
