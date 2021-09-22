@@ -2,6 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import React,{useEffect} from 'react';
 import {NavigationContainer} from "@react-navigation/native"
 import RootNavigator from "./src/Navigators/RootNavigator"
+import AuthNavigators from './src/Navigators/AuthNavigators';
 import axios from 'axios'
 
 export default function App() {
@@ -17,7 +18,7 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <RootNavigator/>
+      {false?<RootNavigator/> : <AuthNavigators/>}
     </NavigationContainer>
   );
 }
