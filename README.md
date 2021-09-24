@@ -15,4 +15,4 @@ save important documents of sales and goods and manage all their customers and s
 
 ## 📚 Resources
 - <a href="https://reactnative.dev/" >React Native </a>
-- <a href="https://mongoosejs.com/docs/ > Mongoose </a>
+- <a href="https://mongoosejs.com/docs/" > Mongoose </a>
