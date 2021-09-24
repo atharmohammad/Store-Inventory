@@ -18,7 +18,7 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      {false?<RootNavigator/> : <AuthNavigators/>}
+      {true?<RootNavigator/> : <AuthNavigators/>}
     </NavigationContainer>
   );
 }

@@ -2,10 +2,20 @@ import React, { useState, useEffect } from "react";
 import { Text, Input,Icon } from "react-native-elements";
 import { TouchableOpacity, FlatList, ScrollView,StyleSheet,View } from "react-native";
 import AddExpense from "../Components/Expenses/AddExpense";
+import axios from "../Axios/axios";
 
 
 export default function Goods(props) {
   const [allGoods, setAllGoods] = useState(null);
+
+  useEffect(async()=>{
+    try{
+      const res = await axios.get('/goods');
+      console.log(res);
+    }catch(e){
+      console.log(e);
+    }
+  },[])
 
   return (
     <View style={styles.head}>

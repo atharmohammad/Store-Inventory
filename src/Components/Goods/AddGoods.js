@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from "react"
 import { Input,Icon } from "react-native-elements";
 import { ScrollView , View , StyleSheet , Text, TouchableOpacity} from "react-native";
+import axios from "../../Axios/axios"
 
 export default function AddGoods(props){
 
@@ -15,6 +16,21 @@ export default function AddGoods(props){
         return;
       }
       setQuantity(parseInt(value))
+    }
+
+    const saveGoods = async()=>{
+      try{
+        const obj = {
+          Name:Name,
+          Quantity:quantity,
+          Barcode:barcode,
+          Description:description
+        }
+        await axios.post('/createGoods',obj);
+        props.navigation.navigate('Goods')
+      }catch(e){
+        console.log(e);
+      }
     }
 
     return (
@@ -53,9 +69,7 @@ export default function AddGoods(props){
           </View>
           <TouchableOpacity
             style={styles.button}
-            onPress={() => {
-              props.navigation.navigate("Goods")
-            }}
+            onPress={() => saveGoods()}
           >
             <Text style={{ color: "#fff", fontWeight: "bold" }}>Save</Text>
           </TouchableOpacity>
