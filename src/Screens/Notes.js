@@ -1,8 +1,19 @@
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 import { Text,Icon } from "react-native-elements";
 import { TouchableOpacity,StyleSheet,View,ScrollView } from "react-native";
+import axios from "../Axios/axios"
 
 export default function Notes(props) {
+
+  useEffect(async()=>{
+    try{
+      const allNotes = await axios.get('/notes');
+      console.log(allNotes)
+    }catch(e){
+      console.log(e);
+    }
+  },[])
+
   return (
     <View  style={styles.head}>
       <ScrollView>

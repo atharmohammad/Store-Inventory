@@ -1,8 +1,23 @@
 import React,{useState} from "react"
 import { TextInput,Text,View,StyleSheet,TouchableOpacity} from "react-native"
+import axios from '../../Axios/axios'
 
 export default function AddNotes(props){
     const [text,setText] = useState("")
+    const [name,setName] = useState("")
+    // Add name in notes
+    const saveNote = async()=>{
+      try{
+        const obj = {
+          Name:name,
+          Notedata:text
+        }
+        await axios.post('/createNotes',obj);
+        props.navigation.navigate("Notes");
+      }catch(e){
+        console.log(e);
+      }
+    }
 
     return (
       <>
@@ -21,7 +36,7 @@ export default function AddNotes(props){
       </View>
       <TouchableOpacity
           style={styles.button}
-          onPress={() => props.navigation.navigate("Notes")}
+          onPress={() => saveNote()}
         >
           <Text style={{ color: "#fff", fontWeight: "bold" }}>Done</Text>
         </TouchableOpacity>

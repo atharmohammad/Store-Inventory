@@ -18,7 +18,7 @@ export default function AddExpense(props){
           Date:date,
           Amount:amount
         }
-        await axios.post('/expense',obj);
+        await axios.post('/createExpense',obj);
         props.navigation.navigate("Expenses")
       }catch(e){
         console.log(e);
