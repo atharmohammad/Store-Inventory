@@ -1,10 +1,20 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Text,Icon } from "react-native-elements";
 import { TouchableOpacity,ScrollView,View,StyleSheet } from "react-native";
+import axios from "../Axios/axios"
 
 export default function Suppliers(props) {
 
-  const [allContacts,setAllContacts] = useState(false)
+  const [allContacts,setAllContacts] = useState(false);
+
+  useEffect(async()=>{
+    try{
+      const res = await axios.get('/contacts');
+      console.log(res);
+    }catch(e){
+      console.log(e);
+    }
+  },[])
 
   return (
     <View style={styles.head}>

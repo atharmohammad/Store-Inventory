@@ -1,8 +1,33 @@
-import React,{useState} from "react"
+import React,{useState,useEffect} from "react"
 import { Input,Text,Icon } from "react-native-elements"
 import {View,StyleSheet,TouchableOpacity} from "react-native"
+import axios from "../../Axios/axios"
 
 export default function AddContacts(props){
+
+  const [name,setName] = useState("");
+  const [address,setAddress] = useState("");
+  const [phone,setPhone] = useState(null);
+  const [email,setEmail] = useState("");
+  const [description,setDescription] = useState("");
+
+  const saveContact = async()=>{
+    const obj = {
+      Name:name,
+      Address:address,
+      Phone:phone,
+      Email:email,
+      Description:description
+    }
+    try{
+      await axios.post('createContact',obj);
+      props.navigation.navigate(props.route.params.parent)
+    }catch(e){
+      console.log(e);
+    }
+    
+  }
+
     return (
       <View>
         <Text
@@ -32,7 +57,7 @@ export default function AddContacts(props){
         </View>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => props.navigation.navigate(props.route.params.parent)}
+          onPress={() => saveContact()}
         >
           <Text style={{ color: "#fff", fontWeight: "bold" }}>Save</Text>
         </TouchableOpacity>
