@@ -1,9 +1,20 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import { Text ,Icon} from "react-native-elements";
 import { TouchableOpacity,StyleSheet,View } from "react-native";
 import { ScrollView } from 'react-native';
+import axios from "../Axios/axios"
 
 export default function Expenses(props) {
+  const [allExpense,setExpense] = useState(null);
+
+  useEffect(async()=>{
+    try{
+      const res = await axios.get('/expense');
+      console.log(res);
+    }catch(e){
+      console.log(e);
+    }
+  },[])
 
   return (
     <View style={styles.head}>

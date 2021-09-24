@@ -1,16 +1,20 @@
 import axios from 'axios';
 
-const fetchClient = () => {
-  const defaultOptions = {
-    baseURL: 'http://192.168.0.112:8080/',
-    method: 'get',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  };
+const instance = axios.create({
+  baseURL : 'http://192.168.0.112:8080/'
+});
+
+// const fetchClient = () => {
+//   const defaultOptions = {
+//     baseURL: 'http://192.168.0.112:8080/',
+//     method: 'get',
+//     headers: {
+//       'Content-Type': 'application/json',
+//     },
+//   };
 
   // Create instance
-  let instance = axios.create(defaultOptions);
+  // let instance = axios.create(defaultOptions);
 
   // Set the AUTH token for any request
   //Intercepting the request to add the auth token 
@@ -26,4 +30,5 @@ const fetchClient = () => {
 //   return instance;
 // };
 
-export default fetchClient();
+// export default fetchClient();
+export default instance

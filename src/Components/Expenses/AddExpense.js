@@ -2,13 +2,28 @@ import React , {useState} from 'react'
 import { View , Text , StyleSheet,TouchableOpacity} from 'react-native'
 import { Input,Icon } from 'react-native-elements'
 import DatePicker from 'react-native-datepicker'
-
+import axios from "../../Axios/axios"
 
 
 export default function AddExpense(props){
 
     const [amount,setAmount] = useState(0);
     const [date,setDate] = useState(new Date());
+    const [name,setName] = useState("");
+    
+    const saveExpense = async()=>{
+      try{
+        const obj = {
+          Name:name,
+          Date:date,
+          Amount:amount
+        }
+        await axios.post('/expense',obj);
+        props.navigation.navigate("Expenses")
+      }catch(e){
+        console.log(e);
+      }
+    }
 
     return (
       <View style={styles.header}>
@@ -59,11 +74,11 @@ export default function AddExpense(props){
         </View>
         <View style={styles.bottomBox}>
           <Icon type="ionicon" name="text" color="orange" size={35} />
-          <Input placeholder="Name" style={styles.nameInput} />
+          <Input placeholder="Name" style={styles.nameInput} onChange={setName}/>
         </View>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => props.navigation.navigate("Expenses")}
+          onPress={() => saveExpense()}
         >
           <Text style={{ color: "#fff", fontWeight: "bold" }}>Done</Text>
         </TouchableOpacity>
