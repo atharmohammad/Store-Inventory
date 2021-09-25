@@ -11,6 +11,7 @@ import {
   Dimensions
 } from "react-native";
 import axios from '../Axios/axios'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const win = Dimensions. get('window');
 
@@ -19,10 +20,20 @@ export default function Login(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+  const storeData = async (value) => {
+    try { 
+      await AsyncStorage.setItem('@shop', value) 
+    }catch (e) {    
+      console.log(e);
+    }
+  }
+
   const loginUser = async()=>{
     try{
       const shop = await axios.post('/login',{UserName:username,Password:password});
-      console.log(shop)
+      // console.log(shop.data)
+      const data = JSON.stringify(shop.data)
+      storeData(data)
     }catch(e){
       console.log(e);
     }

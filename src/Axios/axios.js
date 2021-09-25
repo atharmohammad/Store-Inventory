@@ -1,34 +1,38 @@
 import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const instance = axios.create({
-  baseURL : 'http://192.168.0.112:8080/'
-});
 
-// const fetchClient = () => {
-//   const defaultOptions = {
-//     baseURL: 'http://192.168.0.112:8080/',
-//     method: 'get',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//   };
+const getData = async () => {
+  try {
+    const value = await AsyncStorage.getItem('@shop')
+      return value;
+  } catch(e) {
+    console.log(e);
+  }
+}
 
-  // Create instance
-  // let instance = axios.create(defaultOptions);
+const fetchClient = () => {
+  const defaultOptions = {
+    baseURL: 'http://192.168.0.112:8080/',
+    method: 'get',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
 
-  // Set the AUTH token for any request
-  //Intercepting the request to add the auth token 
-//   instance.interceptors.request.use(function (config) {
-//     let token = null
-//     if(localStorage.getItem("userData")){
-//       token = `Bearer ${JSON.parse(localStorage.getItem("userData")).token}`;
-//     }
-//     config.headers.Authorization = token;
-//     return config;
-//   });
+  let instance = axios.create(defaultOptions);
 
-//   return instance;
-// };
+  instance.interceptors.request.use(async function (config) {
+    let shop =  await getData();
+    shop = JSON.parse(shop)
+    if(shop.token){
+      token = `Bearer ${shop.token}`;
+    }
+    config.headers.Authorization = token;
+    return config;
+  });
 
-// export default fetchClient();
-export default instance
+  return instance;
+};
+
+export default fetchClient();
